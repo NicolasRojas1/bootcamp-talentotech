@@ -16,7 +16,12 @@ En la siguiente imagen se muestra el diseño de la arquitectura a partir de los 
 ![arquitectura_aws](img/Arquitectura.png)
 
 ## Ejecución
-
+* En primera instancia debemos conectarnos con AWS mediante el siguiente comando:
+  ```
+aws configure
+```
+Nos pedirá el Key ID y el Secret Access Key que debemos tener previamente configuradas para este ejercicio, como se ve en la siguiente imagen
+![LoginAWS](img/LoginAWS.png)
 ### Pequeña descripcion sobre la fase de ejecución. Se utilizó el servicio de CloudFormation que es un servicio de infraestructura como código para realizar el despliegue de la arquitectura. Utilizamos el siguiente comando para realiza el despliegue de la arquitectura:
 Primero debemos realizar la validación
 
