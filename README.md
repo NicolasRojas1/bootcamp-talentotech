@@ -55,7 +55,7 @@ git push https://git-codecommit.us-east-1.amazonaws.com/v1/repos/infraestructura
 ![](img/book_password.png)   ![](img/book_user.png)
 
 
-(IAM) es un servicio web que lo ayuda a controlar de forma segura el acceso a los recursos de AWS
+Por otro lado, debemos configurar un Rol en  Identity and Access Management (IAM), el cual es un servicio web que lo ayuda a controlar de forma segura el acceso a los recursos de AWS. Esto se debe a que necesitamos darle un permisos las instancias que soportaran nuestra pagina web para que puedan acceder al System Manager donde se encuentran los parametros de configuración de la página. En este caso el Rol se
 
 ### Pequeña descripcion sobre la fase de ejecución. Se utilizó el servicio de CloudFormation que es un servicio de infraestructura como código para realizar el despliegue de la arquitectura. Utilizamos el siguiente comando para realiza el despliegue de la arquitectura:
 Primero debemos realizar la validación
