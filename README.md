@@ -31,7 +31,7 @@ aws codecommit create-repository --repository-name infraestructura-aws --reposit
 ![Crear Repositorio en CodeCommit](img/code_commit_create_repository_codigo.png)
 ![Repositorio en CodeCommit](img/2_codecommit1.png)
 
-### A continuación debemos asegurar que la sintaxis del  los archivos yml este escritos correctamente según los estructura de AWS, ya que en estos archivos se encuentra toda la infraestructura de nuestra arquitectura. Los validamos con el siguientes códigos:
+### A continuación debemos asegurar que la sintaxis del  los archivos yml de este repositorio estén escritos correctamente según los estructura de AWS, ya que en estos archivos se encuentra toda la infraestructura de nuestra arquitectura. Los validamos con el siguientes códigos:
 
 ```
 aws cloudformation validate-template --template-body file://network.yml
@@ -40,8 +40,22 @@ aws cloudformation validate-template --template-body file://network.yml
 aws cloudformation validate-template --template-body file://application.yml
 ```
 
+### Luego debemos enviarlos a repositorio de CodeCommit con el siguiente comando:
+
+```
+git push https://git-codecommit.us-east-1.amazonaws.com/v1/repos/infraestructura-aws
+```
+### En la consola de AWS se verá asi:
+
+![code_commit_InfraAWS.png](img/code_commit_InfraAWS.png)
+
+### Después debemos configurar el servicio de Parameter Store de Systems Manager de AWS, el cual proporciona un almacenamiento seguro y jerárquico para administrar los datos de configuración, los cuales necesitaremos configurar para nuestro servicio. Los parametros a configurar son los siguientes
+
+![](img/book_database.png)   ![](img/book_host.png)
+![](img/book_password.png)   ![](img/book_user.png)
 
 
+(IAM) es un servicio web que lo ayuda a controlar de forma segura el acceso a los recursos de AWS
 
 ### Pequeña descripcion sobre la fase de ejecución. Se utilizó el servicio de CloudFormation que es un servicio de infraestructura como código para realizar el despliegue de la arquitectura. Utilizamos el siguiente comando para realiza el despliegue de la arquitectura:
 Primero debemos realizar la validación
