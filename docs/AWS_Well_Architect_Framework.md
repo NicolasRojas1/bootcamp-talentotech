@@ -1,5 +1,9 @@
 ### AWS Well-Architected Framework.
 
+
+En la siguiente imagen se muestra el diseño de la arquitectura a partir de los requerimientos
+![arquitectura_aws](../img/Arquitectura.png)
+
 Nuestro diseño de arquitectura está basado en los 7 pilares que describe los conceptos clave, principios de diseño y las prácticas recomendadas para diseñar y ejecutar cargas de trabajo en la nube.
 
 - **Pilar de excelencia operativa:** Nuestra arquitectura cumple con este requerimiento ya que fue diseñada para permitir ejecutar, monitorear y mejorar constantemente los procesos y procedimientos.
