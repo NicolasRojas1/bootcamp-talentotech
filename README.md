@@ -12,8 +12,9 @@ Despliegue de una arquitectura de AWS altamente disponible y escalable en AWS
 
 ### Arquitectura
 
-En la siguiente imagen se muestra el diseño de la arquitectura a partir de los requerimientos
-![arquitectura_aws](img/Arquitectura.png)
+En el siguiente link esta nuestra arquitectura
+
+[AWS_Well_Architect_Framework](docs/AWS_Well_Architect_Framework.md)
 
 ## Ejecución
 En primera instancia debemos conectarnos con AWS mediante el siguiente comando:
@@ -68,6 +69,22 @@ Además, para poder conectarnos a las instancias en las redes privadas de nuestr
 
 ![](img/IAMRole_Keypair.png)
 
+
+
+![](img/network_pipeline_settings1.png)
+	
+
+![](img/network_pipeline_settings2.png)
+	
+
+![](img/network_pipeline_settings3_skip.png)
+	
+
+![](img/network_pipeline_settings4.png)
+
+![](img/network_pipeline_release.png)
+
+![](img/network_cloudformation_deploy.png)
 
 
 ### Pequeña descripcion sobre la fase de ejecución. Se utilizó el servicio de CloudFormation que es un servicio de infraestructura como código para realizar el despliegue de la arquitectura. Utilizamos el siguiente comando para realiza el despliegue de la arquitectura:
