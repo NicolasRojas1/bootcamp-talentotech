@@ -86,6 +86,37 @@ Además, para poder conectarnos a las instancias en las redes privadas de nuestr
 
 ![](img/network_cloudformation_deploy.png)
 
+### Pipeline Application
+
+![](app_pipeline_setting1.png)
+
+![](img/network_pipeline_settings2.png)
+	
+![](img/network_pipeline_settings3_skip.png)
+
+![](img/app_pipeline_settings4.png)
+
+![](img/app_pipeline_release.png)
+
+![](img/webpage_total_deploy.png)
+
+### Despligue
+
+![](img/prueba_pagina.png)
+	
+![](img/prueba_pagina_libros.png)
+	
+
+
+
+
+	
+
+
+	
+
+
+
 
 ### Pequeña descripcion sobre la fase de ejecución. Se utilizó el servicio de CloudFormation que es un servicio de infraestructura como código para realizar el despliegue de la arquitectura. Utilizamos el siguiente comando para realiza el despliegue de la arquitectura:
 Primero debemos realizar la validación
