@@ -16,7 +16,14 @@ En el siguiente link esta nuestra arquitectura
 
 [AWS_Well_Architect_Framework](docs/AWS_Well_Architect_Framework.md)
 
+### Presupuesto
+
+En el siguiente link esta nuestra presupuesto
+[Presupuesto](docs/Presupuesto.md)
+
 ## Ejecución
+Pequeña descripcion sobre la fase de ejecución. Se utilizó el servicio de CloudFormation que es un servicio de infraestructura como código para realizar el despliegue de la arquitectura y CodePipeline, el cual es un servicio de entrega continua completamente administrado que permite automatizar las canalizaciones de lanzamiento para lograr actualizaciones de infraestructura y aplicaciones rápidas y fiables.
+
 En primera instancia debemos conectarnos con AWS mediante el siguiente comando:
   ```
 aws configure
@@ -74,8 +81,7 @@ Además, para poder conectarnos a las instancias en las redes privadas de nuestr
 
 Aqui vamos a crear un stack de recursos el cual configurar las redes públicas, redes privadas, IPs elasticas, route tables, zonas de disponibilidad desde las cuales se desplegará el servicio
 
-Para hacerlo debemos entrar a Codepipeline, el cual es un servicio de entrega continua completamente administrado que permite automatizar las canalizaciones de lanzamiento para lograr actualizaciones de infraestructura y aplicaciones rápidas y fiables.
-Luego, presionamos Create Pipeline y seguimos los etapas
+Para hacerlo debemos entrar a Codepipeline. presionamos Create Pipeline y seguimos los etapas
 
 #### Etapa 1: Configuración del Pipeline
  * Nombre del Pipeline : network-pipeline
@@ -156,19 +162,6 @@ Este  despliegue es rápido, no debe tardar mas de 2 o 3 minutos a diferencia de
 ![](img/prueba_pagina_libros.png)
 	
 
-
-
-
-	
-
-
-	
-
-
-
-
-### Pequeña descripcion sobre la fase de ejecución. Se utilizó el servicio de CloudFormation que es un servicio de infraestructura como código para realizar el despliegue de la arquitectura. Utilizamos el siguiente comando para realiza el despliegue de la arquitectura:
-Primero debemos realizar la validación
 
 
 
