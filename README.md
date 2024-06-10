@@ -24,8 +24,12 @@ En el siguiente link esta nuestro presupuesto
 ## Ejecución
 En el siguiente link está la ejecución del página web desde AWS
 
-[Ejecucion](docs/Ejecucion.md)
-	
+[Ejecución](docs/Ejecucion.md)
+
+ ## Seguimiento y control
+En el siguiente link está la ejecución del página web desde AWS
+
+[Seguimiento](docs/Seguimiento.md)
 
 
 
