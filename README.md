@@ -47,9 +47,11 @@ A continuación debemos asegurar que la sintaxis del  los archivos yml de este r
 ```
 aws cloudformation validate-template --template-body file://network.yml
 ```
+![](img/validate_network.png)
 ```
 aws cloudformation validate-template --template-body file://application.yml
 ```
+![](img/validate_app.png)
 
 Luego debemos enviarlos a repositorio de CodeCommit con el siguiente comando:
 
