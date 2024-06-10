@@ -79,9 +79,9 @@ Además, para poder conectarnos a las instancias en las redes privadas de nuestr
 ### Configuración de Pipelines
 #### Network Pipeline
 
-Aqui vamos a crear un stack de recursos el cual configurar las redes públicas, redes privadas, IPs elasticas, route tables, zonas de disponibilidad desde las cuales se desplegará el servicio
+Aqui vamos a crear un stack de recursos en el cual  se va configurar las redes públicas, redes privadas, IPs elasticas, route tables, zonas de disponibilidad desde las cuales se desplegará el servicio.
 
-Para hacerlo debemos entrar a Codepipeline. presionamos Create Pipeline y seguimos los etapas
+Para hacerlo debemos entrar a Codepipeline, presionamos Create Pipeline y seguimos las etapas
 
 #### Etapa 1: Configuración del Pipeline
  * Nombre del Pipeline : network-pipeline
@@ -110,9 +110,9 @@ Esta configuración lucirá asi:
 
  #### Etapa 4: Despligue
 
-Para este rol debemos antes ir a IAM y crear un Rol para CloudFormation que tenga tenga los acceso total a EC2, RDS,SSM, VPC e IAM para que pueda construir la infraestructura. Este se llamará RolePipeline
+Para este paso debemos antes ir a IAM y crear un Rol para CloudFormation que tenga tenga los acceso total a EC2, RDS,SSM, VPC e IAM para que pueda construir la infraestructura. Este se llamará RolePipeline
 
-Este rol se vera así:
+Este rol se ve así:
 
 ![](img/RolPipeline.png)
 
@@ -125,6 +125,7 @@ Luego configuramos el resto de parámetros:
    * Nombre del artefacto: Artefacto Fuente
    * Nombre del Archivo: network.yml
  * Nombre del Rol: RolPipeline
+   
    Así que da la configuración
 	
 ![](img/network_pipeline_settings4.png)
@@ -139,23 +140,72 @@ A continuación se comienza a desplegar la capa de network, esto se verá en la 
 Y si vamos a CloudFormation al finalizar el despligue lucirá algo como esto:
 ![](img/network_cloudformation_deploy.png)
 
-Este  despliegue es rápido, no debe tardar mas de 2 o 3 minutos a diferencia del siguiente pipeline
+Este  despliegue es rápido, no debe tardar mas de 2 a 3 minutos a diferencia del siguiente pipeline
 
 ### Pipeline Application
 
-![](app_pipeline_setting1.png)
+Aqui vamos a crear un stack de recursos en el cual se configurará las instancias EC2, Load Balancer, Auto Scaling Group y demás recursos necesarios para desplegar el aplicativo.
 
+Seguiremos los mismos pasos que el pipeline de network.
+
+#### Etapa 1: Configuración del Pipeline
+ * Nombre del Pipeline : application-stack
+ * Tipo de Pipeline: V2
+ * Modo de ejecución: Superseed
+ * Rol de Servicio: Se puede crear uno o seleccionar uno ya existente. Este es para dar permisos a CodePipeline para implementar la capa de red, por ejemplo a interactuar con CodeCommit
+
+Esta configuración lucirá asi:
+
+![](img/app_pipeline_setting1.png)
+
+#### Etapa 2: Origen/Fuente
+ * Proveedor de los códigos fuente: AWS CodeCommit
+ * Nombre del repositorio: infraestructura-aws
+ * Nombre de la rama: master
+ * Opciones de detección de cambios: AWS CodePipeline
+ * Fomato de Salida del Artefacto: CodePipeline Default
+
+Esta configuración lucirá asi:
 ![](img/network_pipeline_settings2.png)
-	
+
+ #### Etapa 3: Construcción
+  Tambien nos saltamos esta etapa
+  
 ![](img/network_pipeline_settings3_skip.png)
+
+#### Etapa 4: Despligue
+
+Aquí utilizamos el rol que configuramos en la etapa 4 del pipeline network (RolPipeline)
+
+ * Proveedor de Despliegue: AWS CloudFormation
+ * Region: US East (N. Virginia)
+ * Modo de Acción : Crear o actualizar stack
+ * Nombre del stack: app-stack
+ * Template:
+   * Nombre del artefacto: Artefacto Fuente
+   * Nombre del Archivo: application.yml
+ * Nombre del Rol: RolPipeline
+   
+   Así que da la configuración
 
 ![](img/app_pipeline_settings4.png)
 
+#### Etapa 5 : Revisión 
+
+Aqui se revisa los  detallado en las etapas previas. Al final le damos crear
+
+
+A continuación se comienza a desplegar la capa de application, esto se verá en la consola de AWS CodePipeline similar a esto:
 ![](img/app_pipeline_release.png)
 
+Y si vamos a CloudFormation al finalizar el despligue lucirá algo como esto:
 ![](img/webpage_total_deploy.png)
 
+Este  despliegue es rápido, no debe tardar mas de 8 a 10 minutos a diferencia del siguiente pipeline
+
 ### Despligue
+
+El despliegue de la página web lucirá así:
 
 ![](img/prueba_pagina.png)
 	
