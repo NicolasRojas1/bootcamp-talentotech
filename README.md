@@ -31,7 +31,7 @@ En el siguiente link está la ejecución del página web desde CodePipeline y Cl
  
 En el siguiente link está la como se hace el seguimiento de los recursos página web desde  CloudWatch AWS.
 
-[Seguimiento](docs/Seguimiento.md)
+[Seguimiento y Control](docs/Seguimiento.md)
 
 
 
