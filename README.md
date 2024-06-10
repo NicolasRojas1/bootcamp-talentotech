@@ -17,17 +17,19 @@ En el siguiente link esta nuestra arquitectura
 
 ### Presupuesto
 
-En el siguiente link esta nuestro presupuesto
+En el siguiente link esta nuestro presupuesto mediante la Calculadora de AWS.
 
 [Presupuesto](docs/Presupuesto.md)
 
 ## Ejecución
-En el siguiente link está la ejecución del página web desde AWS
+
+En el siguiente link está la ejecución del página web desde CodePipeline y CloudFormation AWS
 
 [Ejecución](docs/Ejecucion.md)
 
  ## Seguimiento y control
-En el siguiente link está la ejecución del página web desde AWS
+ 
+En el siguiente link está la como se hace el seguimiento de los recursos página web desde  CloudWatch AWS.
 
 [Seguimiento](docs/Seguimiento.md)
 
