@@ -1,0 +1,320 @@
+#AWS infrastructure High Availability and High Scaling
+
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description:
+  This template deploys the architecture with one VPC, two public subnets and two private subnets
+
+Parameters:
+ 
+  VpcCIDR:
+    Type: String
+    Default: 172.16.0.0/16
+  
+  PublicSubnetAIP:
+    Type: String
+    Default: 172.16.1.0/24
+
+  PublicSubnetBIP:
+    Type: String
+    Default: 172.16.2.0/24
+  
+  PrivateSubnetAIP:
+    Type: String
+    Default: 172.16.3.0/24
+  
+  PrivateSubnetBIP:
+    Type: String
+    Default: 172.16.4.0/24
+    
+  PrivateSubnetAAIP:
+    Type: String
+    Default: 172.16.5.0/24
+    
+  PrivateSubnetBBIP:
+    Type: String
+    Default: 172.16.6.0/24
+
+  
+
+
+Resources:
+  
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 
+        Ref: VpcCIDR
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: VPC-WEB-SERVER-BOOK
+
+  PublicSubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: 
+        Ref: VPC
+      AvailabilityZone: us-east-1a
+      CidrBlock: 
+        Ref: PublicSubnetAIP
+      Tags:
+        - Key: Name
+          Value: PublicSubnetA 
+
+  PublicSubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: 
+        Ref: VPC
+      AvailabilityZone: us-east-1b
+      CidrBlock: 
+        Ref: PublicSubnetBIP
+      Tags:
+        - Key: Name
+          Value: PublicSubnetB 
+  
+  PrivateSubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: 
+        Ref: VPC
+      AvailabilityZone: us-east-1a
+      CidrBlock: 
+        Ref: PrivateSubnetAIP
+      Tags:
+        - Key: Name
+          Value: PrivateSubnetA 
+
+  PrivateSubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: 
+        Ref: VPC
+      AvailabilityZone: us-east-1b
+      CidrBlock: 
+        Ref: PrivateSubnetBIP
+      Tags:
+        - Key: Name
+          Value: PrivateSubnetB
+    
+  PrivateSubnetAA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: 
+        Ref: VPC
+      AvailabilityZone: us-east-1a
+      CidrBlock: 
+        Ref: PrivateSubnetAAIP
+      Tags:
+        - Key: Name
+          Value: PrivateSubnetAA
+          
+  PrivateSubnetBB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: 
+        Ref: VPC
+      AvailabilityZone: us-east-1b
+      CidrBlock: 
+        Ref: PrivateSubnetBBIP
+      Tags:
+        - Key: Name
+          Value: PrivateSubnetBB
+          
+##Internet Gateway
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: IG_WSC
+
+  InternetGatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId: 
+        Ref: InternetGateway
+      VpcId: 
+        Ref: VPC
+  
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: 
+        Ref: VPC
+      Tags:
+        - Key: Name
+          Value: Public_Routes
+  
+  PublicRouteA:
+    Type: AWS::EC2::Route
+    DependsOn: InternetGatewayAttachment
+    Properties:
+      RouteTableId:
+        Ref: PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: 
+        Ref: InternetGateway
+
+  PublicSubnet1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: 
+        Ref: PublicRouteTable
+      SubnetId: 
+        Ref: PublicSubnetA
+
+  PublicSubnet2RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: 
+        Ref: PublicRouteTable
+      SubnetId: 
+        Ref: PublicSubnetB
+
+  #Nat Gateway
+  NatGatewayA:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt AipELASTIC.AllocationId
+      SubnetId:
+        Ref: PublicSubnetA
+      Tags:
+        - Key: Name
+          Value: NatGatewayA-subnetPublicA
+
+  NatGatewayB:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt BipELASTIC.AllocationId
+      SubnetId:
+        Ref: PublicSubnetB
+      Tags:
+        - Key: Name
+          Value: NatGatewayA-subnetPublicB
+
+  ##Elastic IP
+  AipELASTIC:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain:
+        Ref: VPC
+      Tags: 
+        - Key: Name
+          Value: EIP-nwA
+  
+  BipELASTIC:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain:
+        Ref: VPC
+      Tags: 
+        - Key: Name
+          Value: EIP-nwB
+
+#Route tables for NatGateway
+  RouteTableNatGatewayA:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: 
+        Ref: VPC
+      Tags:
+        - Key: Name
+          Value: Route-NW-A
+  
+  RouteTableNatGatewayB:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: 
+        Ref: VPC
+      Tags:
+        - Key: Name
+          Value: Route-NW-B
+
+  ##Route for the two Natgateway
+  PublicRouteNgA:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId:
+        Ref: RouteTableNatGatewayA
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: 
+        Ref: NatGatewayA
+
+  PublicRouteNgAB:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId:
+        Ref: RouteTableNatGatewayB
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: 
+        Ref: NatGatewayB
+  
+  ##Associate the route tables to subnets
+  NWARouteAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: 
+        Ref: RouteTableNatGatewayA
+      SubnetId: 
+        Ref: PrivateSubnetA
+
+  NWBRouteAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: 
+        Ref: RouteTableNatGatewayB
+      SubnetId: 
+        Ref: PrivateSubnetB
+
+Outputs:
+
+  VPC: 
+    Description: VPC ID
+    Value: 
+      Ref: VPC
+    Export:
+      Name: !Sub '${AWS::StackName}-VPCID'
+
+  PublicSubnetA:
+    Description: Public Subnet A ID
+    Value: 
+      Ref: PublicSubnetA
+    Export:
+      Name: !Sub '${AWS::StackName}-PublicSubnetA'
+
+  PublicSubnetB:
+    Description: Public Subnet B ID
+    Value: 
+      Ref: PublicSubnetB
+    Export:
+      Name: !Sub '${AWS::StackName}-PublicSubnetB'
+
+  PrivateSubnetA:
+    Description: Private Subnet A ID
+    Value: 
+      Ref: PrivateSubnetA
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnetA'
+  
+  PrivateSubnetB:
+    Description: Private Subnet B ID
+    Value: 
+      Ref: PrivateSubnetB
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnetB'
+
+  PrivateSubnetAA:
+    Description: Private Subnet AA ID
+    Value: 
+      Ref: PrivateSubnetAA
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnetAA'
+  
+  PrivateSubnetBB:
+    Description: Private Subnet BB ID
+    Value: 
+      Ref: PrivateSubnetBB
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnetBB'
