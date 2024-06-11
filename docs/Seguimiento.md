@@ -146,6 +146,9 @@ Nos vamos a CloudWatch Alarms y le damos Create alarm
 ![](../img/AlarmaSettting2.png)
 ![](../img/AlarmaSetting3.png)
 ![](../img/AlarmaCreada.png)
+
+## Paso 6: Configurar correo
+
 ![](../img/SNS1.png)
 ![](../img/SNS2.png)
 ![](../img/sns3correo.png)
