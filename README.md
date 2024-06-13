@@ -16,7 +16,6 @@ Despliegue de una arquitectura de AWS altamente disponible y escalable en AWS
 #### Selección de Servicios de AWS
 - EC2 para instancias de servidor.
 - RDS para bases de datos.
-- S3 para almacenamiento.
 - VPC para redes privadas virtuales.
 
 #### Diseño de la Red
