@@ -2,18 +2,19 @@
 
 
 En la siguiente imagen se muestra el diseño de la arquitectura a partir de los requerimientos
-![arquitectura_aws](../img/Arquitectura.png)
+![](../img/Arquitectura.png)
 
 Nuestro diseño de arquitectura está basado en los 7 pilares que describe los conceptos clave, principios de diseño y las prácticas recomendadas para diseñar y ejecutar cargas de trabajo en la nube.
 
-- **Pilar de excelencia operativa:** Nuestra arquitectura cumple con este requerimiento ya que fue diseñada para permitir ejecutar, monitorear y mejorar constantemente los procesos y procedimientos.
+- **Pilar de excelencia operativa:** En la arquitectura, se observa el uso de Auto Scaling, lo que garantiza que el número adecuado de instancias de Amazon EC2 se mantenga para manejar la carga y se utiliza una NAT Gateway para gestionar el tráfico saliente, lo que contribuye a la monitorización y control del tráfico de red.
 
-- **Pilar de seguridad:** Mediante la administración y permisos de usuarios se dio a nuestro diseño confiabilidad e integridad de los datos para detectar posibles eventos de seguridad.
+- **Pilar de seguridad:** La seguridad se refuerza mediante el uso de VPC (Virtual Private Cloud) con subredes privadas, creando un espacio protegido dentro de AWS, los Security Groups actúan como firewalls virtuales para las instancias EC2, controlando el tráfico entrante, saliente y con el Bastion Host entregamos los permisos para cada uno de los servicios.
 
-- **Pilar de Fiabilidad:** En nuestro diseño se tuvo en cuenta los errores que pueden ocurrir en cualquier momento, así como la capacidad que debe tener para recuperarse rápidamente para cumplir la demanda y adaptarse al cambio.
+- **Pilar de Fiabilidad:** La arquitectura muestra múltiples Zonas de Disponibilidad, lo que garantiza alta disponibilidad y tolerancia a fallos en caso de que una zona falle.
 
-- **Pilar de eficacia del rendimiento:** En nuestra se incluyen los tipos y tamaños de recursos optimizados para la carga de trabajo, supervisión y rendimiento mediante usuarios auditores.
+- **Pilar de eficacia del rendimiento:** El uso de Elastic Load Balancing distribuye el tráfico de aplicaciones entrante entre múltiples destinos (como instancias EC2) en diferentes Zonas de Disponibilidad, mejorando la eficiencia del rendimiento.
 
-- **Pilar de optimización de costos:** Ya que la economía es un tema muy importante, en nuestro proyecto se tuvo en cuenta el ahorro de dinero y de tiempo, seleccionando adecuadamente los recursos que se necesitan en el proyecto.
+- **Pilar de optimización de costos:** Los grupos de Auto Scaling permiten utilizar y pagar solo por las instancias EC2 necesarias sin intervención manual.
 
-- **Pilar de sostenibilidad:** Teniendo en cuenta que debemos actuar con responsabilidad minimizando los impactos ambientales al ejecutar cargas de trabajo en la nube, utilizamos solo los recursos necesarios para nuestra arquitectura.
+- **Pilar de sostenibilidad:** Aunque no se muestra explícitamente en el diagrama de la arquitectura, la sostenibilidad se puede inferir a través de la asignación eficiente de recursos, como la elección de tipos de instancias RDS basada en características de rendimiento necesarias.
+
