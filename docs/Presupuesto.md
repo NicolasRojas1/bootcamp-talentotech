@@ -90,4 +90,4 @@ Las métricas que se incluirán en la estimación de los servicios para cloud wa
 
 ![](../img/calculo.jpg)
 
-![](../img/resumen.jpg)
+![](../img/Resumen.jpg)
