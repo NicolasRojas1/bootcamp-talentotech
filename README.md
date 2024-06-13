@@ -39,7 +39,7 @@ Despliegue de una arquitectura de AWS altamente disponible y escalable en AWS
 
 En el siguiente link esta nuestra arquitectura
 
-[AWS_Well_Architect_Framework](docs/AWS_Well_Architect_Framework.md)
+[Arquitectura](docs/Arquitectura.md)
 
 ### Cronograma de Entregas
 
