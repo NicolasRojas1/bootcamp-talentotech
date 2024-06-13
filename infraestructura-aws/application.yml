@@ -116,14 +116,16 @@ Resources:
           pip install flask
           pip install mysql-connector-python
           pip install boto3
-          wget https://jav-bucket-web.s3.amazonaws.com/python-db-ssm.zip          
-          wget https://jav-bucket-web.s3.amazonaws.com/databases.zip
-          wget https://jav-bucket-web.s3.amazonaws.com/BookDbDump.sql
-          sleep 2
-          sudo unzip python-db-ssm.zip
-          sudo unzip databases.zip 
-          sudo mv python-db-ssm databases /home/ec2-user
-          wget https://jav-bucket-web.s3.amazonaws.com/bookapp.service
+          sudo dnf install git -y
+          sleep 5s
+          sudo git clone https://github.com/pachonestor/bootcamp-talentotech.git
+          cd bootcamp-talentotech/
+          rm -r bootcamp-talentotech/docs/
+          rm -r bootcamp-talentotech/img/
+          rm -r bootcamp-talentotech/infraestructura-aws/
+          rm -r bootcamp-talentotech/databases/
+          rm bootcamp-talentotech/README.md
+          sudo mv python-db /home/ec2-user
           sudo mv bookapp.service /etc/systemd/system
           DB_PASSWORD=$(aws ssm get-parameter --name "/book/password" --query "Parameter.Value" --output text --region "us-east-1")
           mysql -u root -p$DB_PASSWORD --host ${DBbook.Endpoint.Address} < BookDbDump.sql
@@ -157,14 +159,16 @@ Resources:
             pip install flask
             pip install mysql-connector-python
             pip install boto3
-            wget https://jav-bucket-web.s3.amazonaws.com/python-db-ssm.zip          
-            wget https://jav-bucket-web.s3.amazonaws.com/databases.zip
-            wget https://jav-bucket-web.s3.amazonaws.com/BookDbDump.sql
-            sleep 2
-            sudo unzip python-db-ssm.zip
-            sudo unzip databases.zip 
-            sudo mv python-db-ssm databases /home/ec2-user
-            wget https://jav-bucket-web.s3.amazonaws.com/bookapp.service
+            sudo dnf install git -y
+            sleep 5s
+            sudo git clone https://github.com/pachonestor/bootcamp-talentotech.git
+            cd bootcamp-talentotech/
+            rm -r bootcamp-talentotech/docs/
+            rm -r bootcamp-talentotech/img/
+            rm -r bootcamp-talentotech/infraestructura-aws/
+            rm -r bootcamp-talentotech/databases/
+            rm bootcamp-talentotech/README.md
+            sudo mv python-db /home/ec2-user
             sudo mv bookapp.service /etc/systemd/system
             DB_PASSWORD=$(aws ssm get-parameter --name "/book/password" --query "Parameter.Value" --output text --region "us-east-1")
             mysql -u root -p$DB_PASSWORD --host ${DBbook.Endpoint.Address} < BookDbDump.sql
