@@ -15,6 +15,10 @@ En el siguiente link esta nuestra arquitectura
 
 [AWS_Well_Architect_Framework](docs/AWS_Well_Architect_Framework.md)
 
+### Cronograma de Entregas
+
+![](../img/Gantt.png)
+
 ### Presupuesto
 
 En el siguiente link esta nuestro presupuesto mediante la Calculadora de AWS.
