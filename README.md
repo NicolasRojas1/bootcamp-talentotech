@@ -17,7 +17,7 @@ En el siguiente link esta nuestra arquitectura
 
 ### Cronograma de Entregas
 
-![](../img/Gantt.png)
+![](/img/Gantt.png)
 
 ### Presupuesto
 
